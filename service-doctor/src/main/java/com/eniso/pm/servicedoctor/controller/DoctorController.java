@@ -1,4 +1,4 @@
-package com.eniso.pm.controller;
+package com.eniso.pm.servicedoctor.controller;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eniso.pm.entities.Doctor;
-import com.eniso.pm.repository.DoctorRepository;
-import com.eniso.pm.service.DoctorService;
+import com.eniso.pm.servicedoctor.entities.Doctor;
+import com.eniso.pm.servicedoctor.repository.DoctorRepository;
+import com.eniso.pm.servicedoctor.service.DoctorService;
 
 
 @CrossOrigin(origins = "http://localhost:4200")

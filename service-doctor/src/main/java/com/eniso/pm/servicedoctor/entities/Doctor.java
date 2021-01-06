@@ -1,12 +1,18 @@
-package com.eniso.pm.entities;
+package com.eniso.pm.servicedoctor.entities;
+
+import java.io.Serializable;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="doctor")
-@PrimaryKeyJoinColumn(name = "doctor_id")
-public class Doctor {
+public class Doctor implements Serializable {
 	
+	@Id
+    @GeneratedValue
+    private int doctor_id;
+
+
 	@Column(name = "firstName")
 	private String firstName;
 

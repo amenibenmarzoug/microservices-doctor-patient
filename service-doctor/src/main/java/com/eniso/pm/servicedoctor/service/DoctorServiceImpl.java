@@ -1,4 +1,4 @@
-package com.eniso.pm.service;
+package com.eniso.pm.servicedoctor.service;
 
 import java.util.*;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import com.eniso.pm.entities.Doctor;
-import com.eniso.pm.repository.DoctorRepository;
+import com.eniso.pm.servicedoctor.entities.Doctor;
+import com.eniso.pm.servicedoctor.repository.DoctorRepository;
 
 
 @Service

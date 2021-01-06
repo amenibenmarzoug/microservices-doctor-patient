@@ -1,4 +1,4 @@
-package com.eniso.pm.entity;
+package com.eniso.pm.servicepatient.entity;
 import java.io.Serializable;
 
 import javax.persistence.Entity;

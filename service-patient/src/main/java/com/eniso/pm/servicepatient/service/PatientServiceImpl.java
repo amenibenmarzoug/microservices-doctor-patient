@@ -1,4 +1,4 @@
-package com.eniso.pm.service;
+package com.eniso.pm.servicepatient.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import com.eniso.pm.entity.Patient;
-import com.eniso.pm.repository.PatientRepository;
+import com.eniso.pm.servicepatient.entity.Patient;
+import com.eniso.pm.servicepatient.repository.PatientRepository;
 
 
 

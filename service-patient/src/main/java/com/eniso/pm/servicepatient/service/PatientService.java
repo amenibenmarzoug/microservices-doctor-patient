@@ -1,8 +1,8 @@
-package com.eniso.pm.service;
+package com.eniso.pm.servicepatient.service;
 
 import java.util.List;
 
-import com.eniso.pm.entity.Patient;
+import com.eniso.pm.servicepatient.entity.Patient;
 
 
 

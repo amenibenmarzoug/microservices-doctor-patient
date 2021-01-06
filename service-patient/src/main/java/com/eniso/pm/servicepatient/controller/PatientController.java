@@ -1,4 +1,4 @@
-package com.eniso.pm.controller;
+package com.eniso.pm.servicepatient.controller;
 
 import java.util.List;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eniso.pm.entity.Patient;
-import com.eniso.pm.service.PatientService;
+import com.eniso.pm.servicepatient.entity.Patient;
+import com.eniso.pm.servicepatient.service.PatientService;
 
 
 

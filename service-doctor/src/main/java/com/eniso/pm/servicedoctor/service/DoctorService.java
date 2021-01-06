@@ -1,8 +1,8 @@
-package com.eniso.pm.service;
+package com.eniso.pm.servicedoctor.service;
 
 import java.util.List;
 
-import com.eniso.pm.entities.Doctor;
+import com.eniso.pm.servicedoctor.entities.Doctor;
 
 
 public interface DoctorService {
