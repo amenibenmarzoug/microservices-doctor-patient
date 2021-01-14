@@ -16,7 +16,8 @@ import lombok.ToString;
 @Data @NoArgsConstructor @AllArgsConstructor @ToString
 
 public class Patient implements Serializable {
-	@Id @GeneratedValue 
+	@Id 
+	@GeneratedValue 
 	private Long id ; 
 	private String firstName ; 
 	private String lastName ; 

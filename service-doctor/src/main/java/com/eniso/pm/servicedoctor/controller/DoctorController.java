@@ -52,7 +52,7 @@ public class DoctorController {
 		return d;
 	}
 
-	@PostMapping("/addDoctor")
+	@PostMapping("doctors/addDoctor")
 	public  Doctor addDoctor(@RequestBody Doctor d) {
 	
 		doctorService.save(d);
@@ -60,7 +60,7 @@ public class DoctorController {
 	}
 	
 		
-	@PutMapping("/updatedoctor")
+	@PutMapping("doctors/updatedoctor")
 	public Doctor updateDoctor(@RequestBody Doctor d) {
 		
 		doctorService.save(d);

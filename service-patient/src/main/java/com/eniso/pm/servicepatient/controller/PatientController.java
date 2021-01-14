@@ -57,7 +57,7 @@ public class PatientController {
 	}
 	// add mapping for POST /controls - add new control
 
-	@PostMapping("/controls")
+	@PostMapping("patients/addPatient")
 	public  Patient addpatient(@RequestBody Patient p) {
 	
 		 ps.save(p);
