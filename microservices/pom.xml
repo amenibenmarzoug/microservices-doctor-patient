@@ -6,6 +6,7 @@
         <module>discoveryserver</module>
 		<module>./configserver</module>
 		<module>service-doctor</module>
+		<module>gateway-service</module>
 		<module>service-patient</module>
 		<module>service-rendez-vous</module>
 	</modules>
