@@ -1,13 +1,19 @@
 package com.eniso.pm.servicedoctor;
 
+
 import javax.activation.DataSource;
 import javax.annotation.Resource;
 import javax.naming.NamingException;
 
 import org.hibernate.jpa.HibernatePersistenceProvider;
+
+//import javax.sql.DataSource;
+
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
@@ -19,6 +25,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
@@ -29,14 +36,14 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.eniso.pm.controller.DoctorController;
+import com.eniso.pm.servicedoctor.controller.DoctorController;
 
 
-@EnableAutoConfiguration
-
-@ComponentScan(basePackages="com.eniso.pm.controller")
-@EntityScan(basePackages = "com.eniso.pm.entities")
-@EnableJpaRepositories("com.eniso.pm.repository")
+//
+//@PropertySource("classpath:application.properties")
+//@ComponentScan(basePackages="com.eniso.servicedoctor.pm.controller")
+//@EntityScan(basePackages = "com.eniso.pm.servicedoctor.entities")
+//@EnableJpaRepositories("com.eniso.pm.servicedoctor.repository")
 @SpringBootApplication
 
 
@@ -44,15 +51,16 @@ import com.eniso.pm.controller.DoctorController;
 //@EnableTransactionManagement
 //@Resource(lookup="java:jboss/datasources/test") 
 public class ServiceDoctorApplication extends SpringBootServletInitializer  {
-	
+	public static void main(String[] args) {
+		SpringApplication.run(ServiceDoctorApplication.class, args);
+	}
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(ServiceDoctorApplication.class);
 	} 
 
-	public static void main(String[] args) {
-		SpringApplication.run(ServiceDoctorApplication.class, args);
-	}
+
+
 
 
 //   // @Primary

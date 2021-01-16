@@ -23,6 +23,7 @@ public class ConfigserverApplication extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 		return application.sources(ConfigserverApplication.class);
+
 	} 
 //	@Bean
 //	public DataSource dataSource() 
@@ -33,3 +34,4 @@ public class ConfigserverApplication extends SpringBootServletInitializer {
 //	}
 //	
 }
+
