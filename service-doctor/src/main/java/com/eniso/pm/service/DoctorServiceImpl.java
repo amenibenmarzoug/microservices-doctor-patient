@@ -2,6 +2,9 @@ package com.eniso.pm.service;
 
 import java.util.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
@@ -14,9 +17,26 @@ import com.eniso.pm.repository.DoctorRepository;
 @ComponentScan(basePackageClasses = DoctorRepository.class )
 public class DoctorServiceImpl implements DoctorService {
 	
+	@PersistenceContext
+	
+	private EntityManager entityManager; 
+	
+	@Autowired
 	private DoctorRepository doctorRepository;
 	private List<Doctor> doctors;
 	
+	public DoctorServiceImpl() {
+
+	}
+	
+
+	public DoctorServiceImpl(DoctorRepository doctorRepository, List<Doctor> doctors) {
+		super();
+		this.doctorRepository = doctorRepository;
+		this.doctors = doctors;
+	}
+
+
 	@Autowired
 	public DoctorServiceImpl(DoctorRepository doctorRepository) {
 		this.doctorRepository = doctorRepository;

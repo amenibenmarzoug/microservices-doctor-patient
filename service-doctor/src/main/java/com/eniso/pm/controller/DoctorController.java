@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eniso.pm.entities.Doctor;
 import com.eniso.pm.repository.DoctorRepository;
 import com.eniso.pm.service.DoctorService;
-
-
-@CrossOrigin(origins = "http://localhost:4200")
+//@EnableJpaRepositories 
+@CrossOrigin("*")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @ComponentScan(basePackageClasses = DoctorService.class)
 @RequestMapping(value = "/api")
@@ -27,6 +28,7 @@ public class DoctorController {
 	
 	@Autowired
 	DoctorRepository doctorRepository;
+	@Autowired
 	
 	DoctorService doctorService;
 	
@@ -35,9 +37,11 @@ public class DoctorController {
 		this.doctorService = doctorService;
 	} 
 
-	@GetMapping("/doctors")
+	@GetMapping("/doctors") 
 	public List<Doctor> findAll() {
+	
 		return doctorService.findAll();
+		
 	}
 	
 	@GetMapping("doctors/{doctorId}")

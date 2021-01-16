@@ -4,11 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<modules>
         <module>discoveryserver</module>
-		<module>./configserver</module>
+		
 		<module>service-doctor</module>
 		<module>service-patient</module>
 		<module>service-rendez-vous</module>
 	</modules>
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>

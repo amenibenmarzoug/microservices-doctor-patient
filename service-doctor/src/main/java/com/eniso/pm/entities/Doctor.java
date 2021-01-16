@@ -1,11 +1,13 @@
 package com.eniso.pm.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name="doctor")
 @PrimaryKeyJoinColumn(name = "doctor_id")
-public class Doctor {
+public class Doctor implements Serializable {
 	
 	@Column(name = "firstName")
 	private String firstName;
@@ -76,6 +78,10 @@ public class Doctor {
 
 	public void setSpecialisation(String specialisation) {
 		this.specialisation = specialisation;
+	}
+
+	public Doctor() {
+	
 	}
 
 }

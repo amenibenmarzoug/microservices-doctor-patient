@@ -8,7 +8,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="doctor")
+@Table(name="appointement")
 @PrimaryKeyJoinColumn(name = "id")
 public class AppointementTime {
 	
@@ -32,6 +32,10 @@ public class AppointementTime {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
+	}
+
+	public AppointementTime() {
+	
 	}
 
 }
