@@ -42,7 +42,7 @@ public class DoctorServiceImpl implements DoctorService {
 		this.doctorRepository = doctorRepository;
 	}
 	
-	@Override
+@Override
 	public List<Doctor> findAll() {
 		return doctorRepository.findAll();
 	}
@@ -81,7 +81,10 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 		return doctors;
 	}
-
+	public String sayHello() {
+		return "Hello World!";
+	}
+	
 	@Override
 	public void save(Doctor doctor) {
 		doctorRepository.save(doctor);

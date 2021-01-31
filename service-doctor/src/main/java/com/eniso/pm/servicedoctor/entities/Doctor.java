@@ -15,8 +15,18 @@ public class Doctor implements Serializable {
 	
 	@Id
     @GeneratedValue
-    private int doctor_id;
+    private long doctor_id;
 
+
+	public void setDoctor_id(long doctor_id) {
+		this.doctor_id = doctor_id;
+	}
+
+	public long getDoctor_id() {
+		return doctor_id;
+	}
+
+	
 
 	@Column(name = "firstName")
 	private String firstName;
