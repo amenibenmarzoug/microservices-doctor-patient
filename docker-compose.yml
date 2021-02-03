@@ -1,0 +1,125 @@
+version: '3'
+services:
+  configserver:
+    container_name: configserver
+    build:
+      context: .
+      dockerfile: configserver/Dockerfile
+    image: configserver:latest
+    expose:
+      - 9090
+    volumes:
+      - ./config-data:/var/config-data
+    networks:
+      - emp-network
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discoveryserver:8761/eureka
+        -Dspring.cloud.config.server.native.searchLocations=/var/config-data
+    depends_on:
+      - discoveryserver
+    ports:
+      - 9090:9090
+  discoveryserver:
+    container_name: discoveryserver
+    build:
+      context: .
+      dockerfile: discoveryserver/Dockerfile
+    image: discoveryserver:latest
+    ports:
+      - 8761:8761
+    networks:
+      - emp-network
+  service-doctor:
+    container_name: service-doctor
+    build:
+      context: .
+      dockerfile: service-doctor/Dockerfile
+    image: service-doctor:latest
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discoveryserver:8761/eureka
+    depends_on:
+      - discoveryserver
+      - configserver
+    networks:
+      - emp-network
+    ports:
+      - 8083:8083
+    expose:
+      - 8083
+    links:
+      - configserver:configserver
+      - discoveryserver:discoveryserver
+    logging:
+      driver: json-file
+  service-patient:
+    container_name: service-patient
+    build:
+      context: .
+      dockerfile: service-patient/Dockerfile
+    image: service-patient:latest
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
+    links:
+      - configserver:configserver
+      - discoveryserver:discoveryserver
+    networks:
+      - emp-network
+    restart: on-failure
+    depends_on:
+      - discoveryserver
+      - configserver
+    expose:
+      - 8082
+    ports:
+      - 8082:8082
+    logging:
+      driver: json-file
+  service-rendez-vous:
+    container_name: service-rendez-vous
+    build:
+      context: .
+      dockerfile: service-rendez-vous/Dockerfile
+    image: service-rendez-vous:latest
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://discovery:8761/eureka
+    links:
+      - configserver:configserver
+      - discoveryserver:discoveryserver
+    networks:
+      - emp-network
+    restart: on-failure
+    depends_on:
+      - discoveryserver
+      - configserver
+    expose:
+      - 8085
+    ports:
+      - 8085:8085
+    logging:
+      driver: json-file
+  gateway-service:
+    container_name: gateway-service
+    build:
+      context: .
+      dockerfile: gateway-service/Dockerfile
+    image: gateway-service:latest
+    expose:
+      - 8084
+    ports:
+      - 8084:8084
+    networks:
+      - emp-network
+    links:
+      - discoveryserver:discoveryservice
+    depends_on:
+      - discoveryserver
+    logging:
+      driver: json-file
+networks:
+  emp-network:
+    driver: bridge
+
