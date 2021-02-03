@@ -29,7 +29,7 @@ public class PatientController {
 
 
 
-
+	@Autowired
 	private PatientService ps;
 	@Autowired
 	public PatientController(PatientService patientService) {
