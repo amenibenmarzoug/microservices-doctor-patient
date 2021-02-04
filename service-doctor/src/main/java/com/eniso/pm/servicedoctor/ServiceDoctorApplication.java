@@ -21,6 +21,7 @@ import org.springframework.boot.autoconfigure.jdbc.JndiDataSourceAutoConfigurati
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Lazy;
@@ -39,17 +40,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import com.eniso.pm.servicedoctor.controller.DoctorController;
 
 
-//
-//@PropertySource("classpath:application.properties")
-//@ComponentScan(basePackages="com.eniso.servicedoctor.pm.controller")
-//@EntityScan(basePackages = "com.eniso.pm.servicedoctor.entities")
-//@EnableJpaRepositories("com.eniso.pm.servicedoctor.repository")
+@EnableFeignClients("com.eniso.pm.servicedoctor")
+
 @SpringBootApplication
 
 
-//@EnableJpaRepositories(basePackages = { "com.eniso.pm.controller" , "com.eniso.pm.repository" } )
-//@EnableTransactionManagement
-//@Resource(lookup="java:jboss/datasources/test") 
 public class ServiceDoctorApplication extends SpringBootServletInitializer  {
 	public static void main(String[] args) {
 		SpringApplication.run(ServiceDoctorApplication.class, args);

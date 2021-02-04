@@ -58,21 +58,25 @@ public class PatientController {
 	// add mapping for POST /controls - add new control
 
 	@PostMapping("patients/addPatient")
-	public  Patient addpatient(@RequestBody Patient p) {
+	public void addpatient(@RequestBody Patient p) {
 	
 		 ps.save(p);
-		return p;
+		//return p;
 	}
 	
 	
 	// add mapping for PUT /employees - update existing employee
 	
 		@PutMapping("/patients")
-		public Patient updatePatient(@RequestBody Patient p) {
+		public void updatePatient(@RequestBody Patient p) {
+			Patient patient = new Patient() ;
+			patient.setFirstName(p.getFirstName());
+			patient.setLastName(p.getLastName());
+			patient.setEmail(p.getEmail());
+			patient.setGender(p.getGender());
+			ps.save(patient);
 			
-			ps.save(p);
-			
-			return p;
+			//return p;
 		}
 
 		@DeleteMapping("/patients/{patientId}")

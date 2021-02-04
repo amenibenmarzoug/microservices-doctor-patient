@@ -1,17 +1,9 @@
 package com.eniso.pm.servicedoctor.controller;
 
-
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,16 +13,16 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-//@EnableJpaRepositories 
-
-//@CrossOrigin(origins = "http://localhost:4200")
+import com.eniso.pm.servicedoctor.dal.PatientServiceClient;
+import com.eniso.pm.servicedoctor.dal.PatientServiceDAL;
+import com.eniso.pm.servicedoctor.dto.PatientDto;
 
 import com.eniso.pm.servicedoctor.entities.Doctor;
 import com.eniso.pm.servicedoctor.repository.DoctorRepository;
 import com.eniso.pm.servicedoctor.service.DoctorService;
-
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 //@CrossOrigin("*")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -40,13 +32,20 @@ import com.eniso.pm.servicedoctor.service.DoctorService;
 @RequestMapping(value = "/api")
 public class DoctorController {
 
-	@Bean
-	public RestTemplate getRestTemplate() {
-		return new RestTemplate();
-	}
-
+//	@Bean
+//	public RestTemplate getRestTemplate() {
+//		return new RestTemplate();
+//	}
+    
+      @Bean
+    public PatientServiceDAL getPatientServiceDAL() {
+        return new PatientServiceDAL();
+    }
 	@Autowired
-	RestTemplate restTemplate;
+	PatientServiceClient patientService;
+      
+//	@Autowired
+//	RestTemplate restTemplate;
 
 	@Autowired
 	DoctorRepository doctorRepository;
@@ -58,14 +57,51 @@ public class DoctorController {
 	public DoctorController(DoctorService doctorService) {
 		this.doctorService = doctorService;
 	}
-	 @RequestMapping(value = "/template/patients")
-	   public String getPatiens() {
-	      HttpHeaders headers = new HttpHeaders();
-	      headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-	      HttpEntity <String> entity = new HttpEntity<String>(headers);
-	      
-	      return restTemplate.exchange("http://localhost:8080/service-patient", HttpMethod.GET, entity, String.class).getBody();
-	   }
+//
+//	@RequestMapping(value = "/template/patients")
+//	public String getPatiens() {
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		HttpEntity<String> entity = new HttpEntity<String>(headers);
+//
+//		return restTemplate.exchange(MicroservicesURL.PATIENT_SERVICE_URL.concat("/api/patients"), HttpMethod.GET,
+//				entity, String.class).getBody();
+//	}
+//
+//	@RequestMapping(value = "/template/addPatient")
+//	public String addPatiens(@RequestBody PatientDto p) {
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		HttpEntity<String> entity = new HttpEntity<String>(headers);
+//
+//		return restTemplate.exchange(MicroservicesURL.PATIENT_SERVICE_URL.concat("/api/patients/addPatient"),
+//				HttpMethod.POST, entity, String.class).getBody();
+//	}
+//
+//	@RequestMapping(value = "/template/editPatient")
+//	public String editPatiens() {
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		HttpEntity<String> entity = new HttpEntity<String>(headers);
+//
+//		return restTemplate.exchange(MicroservicesURL.PATIENT_SERVICE_URL.concat("/api/patients"), HttpMethod.PUT,
+//				entity, String.class).getBody();
+//	}
+//
+//	@RequestMapping(value = "/template/deletePatient/{id}")
+//	public String deletePatiens(@PathVariable long id) {
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+//		HttpEntity<String> entity = new HttpEntity<String>(headers);
+//
+//		return restTemplate.exchange(MicroservicesURL.PATIENT_SERVICE_URL.concat("/api/patients/{id}"),
+//				HttpMethod.DELETE, entity, String.class).getBody();
+//	}
+
+	@RequestMapping(value = "/patients")
+	public List<PatientDto> listDesPatients() {
+		return doctorService.getPatients();
+	}
 
 	@GetMapping("/doctors")
 	public List<Doctor> findAll() {

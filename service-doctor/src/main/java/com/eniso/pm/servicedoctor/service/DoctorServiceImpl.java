@@ -1,5 +1,7 @@
 package com.eniso.pm.servicedoctor.service;
 
+import com.eniso.pm.servicedoctor.dal.PatientServiceDAL;
+import com.eniso.pm.servicedoctor.dto.PatientDto;
 import java.util.*;
 
 import javax.persistence.EntityManager;
@@ -12,89 +14,90 @@ import org.springframework.stereotype.Service;
 import com.eniso.pm.servicedoctor.entities.Doctor;
 import com.eniso.pm.servicedoctor.repository.DoctorRepository;
 
-
 @Service
-@ComponentScan(basePackageClasses = DoctorRepository.class )
+@ComponentScan(basePackageClasses = DoctorRepository.class)
 public class DoctorServiceImpl implements DoctorService {
-	
-	@PersistenceContext
-	
-	private EntityManager entityManager; 
-	
-	@Autowired
-	private DoctorRepository doctorRepository;
-	private List<Doctor> doctors;
-	
-	public DoctorServiceImpl() {
 
-	}
-	
+    @PersistenceContext
 
-	public DoctorServiceImpl(DoctorRepository doctorRepository, List<Doctor> doctors) {
-		super();
-		this.doctorRepository = doctorRepository;
-		this.doctors = doctors;
-	}
+    private EntityManager entityManager;
 
+    @Autowired
+    private DoctorRepository doctorRepository;
+    @Autowired
+    PatientServiceDAL patientServiceDAL;
+    private List<Doctor> doctors;
 
-	@Autowired
-	public DoctorServiceImpl(DoctorRepository doctorRepository) {
-		this.doctorRepository = doctorRepository;
-	}
-	
-@Override
-	public List<Doctor> findAll() {
-		return doctorRepository.findAll();
-	}
+    public DoctorServiceImpl() {
 
-	@Override
-	public Doctor findById(long id) {
-		Optional<Doctor> result = doctorRepository.findById(id);
-		
-		Doctor doctor = null;
-		
-		if (result.isPresent()) {
-			doctor = result.get();
-		}
-		else {
-			throw new RuntimeException("Did not find doctor id - " + id);
-		}
-		
-		return doctor;
-	}
+    }
 
-	@Override
-	public List<Doctor> findBySpecialisation(String specialisation) {
-		doctors = null;
-		
-		
+    public DoctorServiceImpl(DoctorRepository doctorRepository, List<Doctor> doctors) {
+        super();
+        this.doctorRepository = doctorRepository;
+        this.doctors = doctors;
+    }
 
-		for(Doctor d:doctorRepository.findAll()) {
-			
-			
-		if  (d.getSpecialisation()== specialisation) {
-    	  
-			doctors.add(d) ;
-		
-      }
-	            	
-	}
-		return doctors;
-	}
-	public String sayHello() {
-		return "Hello World!";
-	}
-	
-	@Override
-	public void save(Doctor doctor) {
-		doctorRepository.save(doctor);
-		
-	}
+    @Autowired
+    public DoctorServiceImpl(DoctorRepository doctorRepository) {
+        this.doctorRepository = doctorRepository;
+    }
 
-	@Override
-	public void deleteById(long id) {
-		doctorRepository.deleteById(id);
-		
-	}
+    @Override
+    public List<Doctor> findAll() {
+        return doctorRepository.findAll();
+    }
+
+    @Override
+    public Doctor findById(long id) {
+        Optional<Doctor> result = doctorRepository.findById(id);
+
+        Doctor doctor = null;
+
+        if (result.isPresent()) {
+            doctor = result.get();
+        } else {
+            throw new RuntimeException("Did not find doctor id - " + id);
+        }
+
+        return doctor;
+    }
+
+    @Override
+    public List<Doctor> findBySpecialisation(String specialisation) {
+        doctors = null;
+
+        for (Doctor d : doctorRepository.findAll()) {
+
+            if (d.getSpecialisation() == specialisation) {
+
+                doctors.add(d);
+
+            }
+
+        }
+        return doctors;
+    }
+
+    @Override
+    public List<PatientDto> getPatients() {
+        return patientServiceDAL.getPatients();
+    }
+
+    public String sayHello() {
+        return "Hello World!";
+    }
+
+    @Override
+    public void save(Doctor doctor) {
+        doctorRepository.save(doctor);
+
+    }
+
+    @Override
+    public void deleteById(long id) {
+        doctorRepository.deleteById(id);
+
+    }
 
 }
