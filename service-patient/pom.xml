@@ -21,6 +21,9 @@
 	<properties>
 		<java.version>1.8</java.version>
 		 <spring-cloud.version>Hoxton.SR3</spring-cloud.version>
+		 <app.name>service-patient</app.name>
+		 <project.test.result.directory>${project.build.directory}/test-results</project.test.result.directory>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
 	</properties>
 
 	<dependencies>
@@ -112,6 +115,12 @@
 					<addResources>true</addResources>
 					<finalName>${app.name}</finalName>
 				</configuration>
+
+			</plugin>
+					<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.7.0.1746</version>
 			</plugin>
 			<plugin>
         <groupId>org.apache.maven.plugins</groupId>
